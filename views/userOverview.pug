@@ -1,0 +1,18 @@
+extends base
+
+
+
+block content
+    .card-container
+        each user, i in users
+            .box-review
+                
+                .reviews__card
+                    .reviews__avatar   
+                        img.reviews__avatar-img(src=`/img/users/${user.photo}` alt=`${user.name}`)
+                        h6.reviews__user= user.name
+                    h6.reviews__user= user.email
+                    .btn-user
+                        a.btn-userUpdate.btn--green(href=`/manage-users/update-user/${user._id}`) Update
+                        a.delete-user.btn-userUpdate(href= `/manage-users/delete-user/${user._id}`) Delete
+                    

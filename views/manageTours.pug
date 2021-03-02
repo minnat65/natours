@@ -1,0 +1,41 @@
+extends base
+
+mixin navItems(link, text, icon, active)
+    li(class= `${active} ? li.side-nav--active' : ''`)
+        a(href=`${link}`)
+            svg
+                use(xlink:href=`/img/icons.svg#icon-${icon}`)
+            | #{text}
+
+
+block content
+    main.main
+        .user-view
+            nav.user-view__menu
+                ul.side-nav
+                    +navItems('#', 'Settings', 'settings', true)
+                    +navItems('/my-tour', 'My bookings', 'briefcase')
+                    +navItems('/my-reviews', 'My reviews', 'star')
+                    +navItems('#', 'Billing', 'credit-card')
+
+                -if(user.role=='admin')    
+                    .admin-nav
+                        h5.admin-nav__heading Admin
+                        ul.side-nav
+                            +navItems('/manage-tours', 'Manage tours', 'map',)
+                            +navItems('/manage-users', 'Manage Users', 'users')
+                            +navItems('/manage-reviews', 'Manage reviews', 'star' )
+                            +navItems('#', 'Manage Bookings', 'briefcase')
+                        
+    
+            .user-view__content
+                .user-view__form-container
+                    h2.heading-secondary.ma-bt-md Tours Managements
+                    ul
+                        li.tour-manage
+                            a(href="/manage-tours/create-tour") Create Tour
+                        //-li.tour-manage
+                            a(href="/manage-tours/upload-cover-pic") Update Tour
+                        li.tour-manage
+                            a(href="/manage-tours/get-all-tours") Get All Tours
+                    

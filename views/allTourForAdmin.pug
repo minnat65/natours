@@ -1,0 +1,17 @@
+extends base
+
+
+
+block content
+    .card-container
+        each tour, i in tours
+            .box-review
+                
+                .reviews__card
+                    .reviews__avatar   
+                        h6.reviews__user= tour.name
+                    //-h6.reviews__user= user.email
+                    .btn-user
+                        a.btn-userUpdate.btn--green(href=`/manage-tours/update-tour/${tour._id}`) Update
+                        a.delete-user(href= `/manage-tours/delete-tour/${tour._id}`) Delete
+                    

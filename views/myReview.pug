@@ -1,0 +1,12 @@
+extends base
+include _reviewCard
+
+block content
+    .box
+        if reviews.length>0
+            each review, i in reviews
+                .box-review
+                    //-div.tourname-review=tourNames[i]
+                    +reviewCard(review)
+        else
+            div.tourname-review.noReview There is no review to show.

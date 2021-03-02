@@ -1,0 +1,20 @@
+extends base
+
+block content
+    main.main 
+        .user-view
+            .user-view__content
+                .user-view__form-container
+                    h2.heading-secondary.ma-bt-md Upload Cover image 
+                    form.form.uploadCoverImage
+                        
+                        .form__group.form__photo-upload
+                            button.btn.btn--small.btn#selecttours first click here
+                            //-select(name='tours')
+                            
+                            //-img.form__user-photo(src=`/img/users/${user.photo}`, alt=`${user.name}'s photo`)
+                            input.form__upload(type='file', accept='image/*', id='photo', name='imageCover')
+                            label(for='photo') Cover photo
+                            
+                        .form__group.right
+                            button.btn.btn--small.btn--green Upload

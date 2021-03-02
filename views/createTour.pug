@@ -1,0 +1,73 @@
+extends base
+
+mixin navItems(link, text, icon, active)
+    li(class= `${active} ? li.side-nav--active' : ''`)
+        a(href=`${link}`)
+            svg
+                use(xlink:href=`/img/icons.svg#icon-${icon}`)
+            | #{text}
+
+
+block content
+    main.main
+        .user-view
+            nav.user-view__menu
+                ul.side-nav
+                    +navItems('#', 'Settings', 'settings', true)
+                    +navItems('/my-tour', 'My bookings', 'briefcase')
+                    +navItems('/my-reviews', 'My reviews', 'star')
+                    +navItems('#', 'Billing', 'credit-card')
+
+                -if(user.role=='admin')    
+                    .admin-nav
+                        h5.admin-nav__heading Admin
+                        ul.side-nav
+                            +navItems('/manage-tours', 'Manage tours', 'map',)
+                            +navItems('/manage-users', 'Manage Users', 'users')
+                            +navItems('/manage-reviews', 'Manage reviews', 'star' )
+                            +navItems('#', 'Manage Bookings', 'briefcase')
+                        
+    
+            .user-view__content
+                .user-view__form-container
+                    h2.heading-secondary.ma-bt-md Create Tour
+                    //-Without API user data update
+                    //-form.form.form-user-data(action= '/submit-user-data' method= 'POST')
+                    
+                    //-With API
+                    form.form.createTour
+                        .form__group
+                            label.form__label(for='name') Tour Name
+                            input#name.form__input(type='text',  required, name='name')
+                        .form__group
+                            label.form__label(for='duration') Durations
+                            input#duration.form__input(type='text', required, name='duration')
+                        .form__group
+                            label.form__label(for='maxGroup') Max Group Size
+                            input#maxGroup.form__input(type='text', required, name='maxGroup')
+                        .form__group
+                            label.form__label(for='difficulty') Difficulty
+                            input#difficulty.form__input(type='text', required, name='difficulty')
+                        .form__group
+                            label.form__label(for='price') Price(in $)
+                            input#price.form__input(type='text', required, name='price')
+                        .form__group
+                            label.form__label(for='startdate') Start Date
+                            input#startdate.form__input(type='text', required, name='startdate', placeholder='yyyy-mm-dd')
+                        .form__group
+                            label.form__label(for='summary') Summary
+                            input#summary.form__input(type='text', required, name='summary')
+                        .form__group
+                            label.form__label(for='description') Description
+                            input#description.form__input(type='text', required, name='description')
+                        
+                        .form__group
+                            label.form__label(for='latitude') Latitude
+                            input#latitude.form__input(type='text', required, name='latitude')
+                        .form__group
+                            label.form__label(for='longitude') Longitude
+                            input#longitude.form__input(type='text', required, name='longitude')
+                          
+                        .form__group.right
+                            button.btn.btn--small.btn--green Create
+                
