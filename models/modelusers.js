@@ -84,7 +84,7 @@ userSchema.methods.correctPassword= async function(candidatePassword, userPasswo
 
 userSchema.methods.changedpasswordAfter= function(JWTTimestamp){
     if(this.passwordchangedAt){
-        console.log(passwordchangedAt);
+        //console.log(passwordchangedAt);
     }
 
     return false;
@@ -95,7 +95,6 @@ userSchema.methods.createPasswordResetToken= function(){
 
     this.passwordResetToken= crypto.createHash('sha256').update(resetToken).digest('hex');
     this.passwordResetExpires= Date.now()+10*60*1000;
-    //console.log(resetToken, this.passwordResetToken);
     
     return resetToken;
 }

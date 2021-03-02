@@ -60,7 +60,7 @@ reviewSchema.statics.calcAverageRatings = async function(tourId){
             }
         }
     ]);
-    console.log(stats);
+    //console.log(stats);
     //leaving it for later
     if(stats.length > 0){
         await mongoose.model('Tour').findByIdAndUpdate(tourId, {
@@ -84,7 +84,7 @@ reviewSchema.pre(/^findOneAnd/, async function(next){
     //this.r will be available after query has been executed.
     //we cannot use POST middleware here because Query won't be available.
     this.r = await this.findOne();
-    console.log(this.r);
+    //console.log(this.r);
     next();
 });
 reviewSchema.post(/^findOneAnd/, async function(){

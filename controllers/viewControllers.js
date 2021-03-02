@@ -28,7 +28,6 @@ exports.getTour = catchAsync(async (req, res, next) => {
         path: 'reviews',
         fields: 'review rating user'
     });
-    console.log(tour.reviews);
     if (!tour) {
         return next(new AppError('There is no tour with that name.'))
     }
@@ -90,7 +89,6 @@ exports.getMyReview = async (req, res, next) => {
 }
 
 exports.updateUser = async (req, res, next) => {
-    console.log(req.user);
     const updateData = await User.findByIdAndUpdate(req.user.id, {
         name: req.body.name,
         email: req.body.email
@@ -110,7 +108,6 @@ exports.getTop5Tours = async (req, res, next) => {
 
         })
         const tours = result.data.data.data
-        console.log(tours[0]);
         res.status(200).render('top5tour', {
             title: 'Top-5-Tours',
             tours
@@ -186,7 +183,7 @@ exports.createUser = (req, res, next) => {
 
 exports.updateUserByAdmin = async (req, res, next) => {
     const user = await User.findById(req.params.userId);
-    console.log(req.body);
+    //console.log(req.body);
 
     res.status(200).render('updateUser', {
         title: 'Users',
@@ -211,7 +208,6 @@ exports.deleteUser = async (req, res, next) => {
     try {
         const userId = req.params.userId;
         const deletedUser = await User.findByIdAndDelete(userId);
-        console.log(deletedUser);
 
         next();
     } catch (err) {

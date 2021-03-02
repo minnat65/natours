@@ -6,7 +6,7 @@ export const create_user = async (name, email, password, passwordConfirm)=>{
     try{
         const res = await axios({
             method: 'POST',
-            url: 'http://127.0.0.1:3000/api/v1/users',
+            url: '/api/v1/users',
             data:{
                 name,
                 email,
@@ -30,7 +30,7 @@ export const update_user = async (name, email, userID)=>{
     try{
             const rest= await axios({
                 method: 'PATCH',
-                url: `http://127.0.0.1:3000/api/v1/users/${userID}`,
+                url: `/api/v1/users/${userID}`,
                 data:{
                     name,
                     email
@@ -52,7 +52,7 @@ export const update_user = async (name, email, userID)=>{
 export const delete_user = async userID =>{
     const res = await axios({
         method: 'DELETE',
-        url: `http://127.0.0.1:3000/api/v1/users/${userID}`
+        url: `/api/v1/users/${userID}`
     })
     console.log(res.data);
 }

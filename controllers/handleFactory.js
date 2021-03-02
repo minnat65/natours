@@ -38,10 +38,8 @@ exports.updateOne = Model =>
 exports.createOne = Model =>
     catchAsync(async (req, res, next) => {
         //JSON.parse(req.body.startLocation);
-        
-        console.log(req.body)
+    
         const doc = await Model.create(req.body);
-        console.log(doc);
         res.status(201).json({
             status: 'success',
             data: {
@@ -70,7 +68,6 @@ exports.getOne = (Model, popOption) =>
 
 exports.getAll = Model =>
     catchAsync(async (req, res, next) => {
-        console.log('user data.')
         //to allow for nested GET reviews of tour (Hack) 
         let filter = {}
         if (req.params.tourId) filter = { tour: req.params.tourId };

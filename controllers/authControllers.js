@@ -24,7 +24,6 @@ const createSendToken = (user, statusCode, res) => {
     res.cookie('jwt', token, cookieOption);
     //remove password field from output not from DB
     user.password = undefined;
-    console.log('Account created');
     res.status(statusCode).json({
         status: 'Success',
         token,

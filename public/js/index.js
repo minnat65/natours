@@ -30,13 +30,6 @@ const createuser = document.querySelector('.createUser')
 const updateuser = document.querySelector(`.updateUser`)
 const deleteUser = document.getElementById('deleteUser');
 
-if(deleteUser){
-    deleteUser.addEventListener('click', e=>{
-        const id = document.querySelector('.x');
-        console.log(id);
-    })
-}
-
 let flag = false;
 if (selectDate) {
     selectDate.addEventListener('click', (e) => {
@@ -72,7 +65,7 @@ if (loginForm) {
 
         const email = document.getElementById('email').value;
         const password = document.getElementById('password').value;
-        //console.log(email, password);
+        
         login(email, password);
     })
 }
@@ -86,7 +79,7 @@ if (user) {
     user.addEventListener('click', async (e) => {
         const res = await axios({
             method: 'GET',
-            url: 'http://127.0.0.1:3000/api/v1/users/getMe'
+            url: '/api/v1/users/getMe'
         })
         if (res.data.status === 'Success') {
             location.assign('/me');
@@ -102,9 +95,7 @@ if (updateUserData) {
         form.append('name', document.getElementById('name').value)
         form.append('email', document.getElementById('email').value)
         form.append('photo', document.getElementById('photo').files[0]);
-        //console.log(form);
-        //const name= document.getElementById('name').value;
-        //const email= document.getElementById('email').value;
+        
         updateSettings(form, 'data');
     });
 }
@@ -132,7 +123,6 @@ if (bookBtn) {
         let date;
         if (flag) {
             date = document.querySelector('.dateInput').value;
-            console.log(date);
         }
 
         if (flag && date) {
@@ -151,26 +141,6 @@ if (createTour) {
     createTour.addEventListener('submit', async e => {
         e.preventDefault();
 
-        //let form = new FormData();
-        /*
-                form.append('name', document.getElementById('name').value);
-                form.append('duration', document.getElementById('duration').value);
-                form.append('maxGroupSize', document.getElementById('maxGroup').value);
-                form.append('price', document.getElementById('price').value);
-                form.append('difficulty', document.getElementById('difficulty').value.toLowerCase());
-                form.append('summary', document.getElementById('summary').value);
-                //form.append('imageCover',  document.getElementById('photo').files[0]);
-                const lat = document.getElementById('latitude').value;
-                const lng = document.getElementById('longitude').value;
-                form.append('startDates', [document.getElementById('startdate').value]);
-                //let startDates = [document.getElementById('startdate').value];
-                let startLocation= {coordinates: [lng, lat]}
-                form.append('startLocation', startLocation);
-                console.log(startLocation);
-                //console.log(form.entries())
-                create(form);
-                */
-
         const name = document.getElementById('name').value;
         const duration = document.getElementById('duration').value;
         const maxGroup = document.getElementById('maxGroup').value;
@@ -178,15 +148,11 @@ if (createTour) {
         const price = document.getElementById('price').value;
         const summary = document.getElementById('summary').value;
         const description = document.getElementById('description').value;
-        //const imageCover = document.getElementById('photo').files[0];
         const lat = document.getElementById('latitude').value;
         const lng = document.getElementById('longitude').value;
         let startDates = [document.getElementById('startdate').value];
         let startLocation = { coordinates: [lng, lat] };
-        //form.append('imageCover',  document.getElementById('photo').files[0]);
-
-
-        //console.log(CoverPhoto);
+        
         create(name, duration, maxGroup, difficulty, price, summary, description, startLocation, startDates);
     })
 }
@@ -197,9 +163,9 @@ if(selectTours){
 
         const res = await axios({
             method: 'GET',
-            url: 'http://127.0.0.1:3000/api/v1/tours'
+            url: '/api/v1/tours'
         })
-        //console.log(res.data.data.data[0].name);
+        
         createdTourId = res.data.data.data[0]._id;
     })
 }
@@ -233,9 +199,8 @@ if(createuser){
 if(updateuser){
     updateuser.addEventListener('submit', e=>{
         e.preventDefault();
-        console.log('click update')
+        
         const userID = e.target.dataset.userId;
-        console.log(userID)
         let name= document.getElementById('name').value;
         let email= document.getElementById('email').value;
         
@@ -257,7 +222,7 @@ if(updateTourByAdmin){
         let startDates = [document.getElementById('startdate').value];
         let startLocation = { coordinates: [lng, lat] };
         
-        //console.log(CoverPhoto);
+        
         updateTour(name, duration, maxGroup, difficulty, price, summary, description, startLocation, startDates);
    
     })

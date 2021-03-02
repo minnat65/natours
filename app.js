@@ -8,6 +8,7 @@ const rateLimit= require('express-rate-limit');
 const mongoSanitize= require('express-mongo-sanitize');
 const xss= require('xss-clean');
 const hpp= require('hpp');
+const compression = require('compression');
 const cookieParser = require('cookie-parser');
 
 //including our own module
@@ -80,6 +81,8 @@ app.use((req, res, next)=>{
     next();
 });
 
+app.use(compression());
+
 //Test middleware
 /*app.use((req, res, next) => {
     req.requestTime = new Date().toISOString();
@@ -102,7 +105,7 @@ app.all('*', (req, res, next)=>{
         status: 'Failed',
         message: 'Page is not found.'
     });*/
-    console.log(req.params);
+    //console.log(req.params);
     const err= new appError('Page not Found', 404);
     //err.statusCode= 404;
     //err.status= 'failed';
